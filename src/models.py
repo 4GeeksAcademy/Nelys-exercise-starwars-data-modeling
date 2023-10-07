@@ -15,21 +15,7 @@ class Usuarios(Base):
     email = Column(String(50), nullable=False)
     password = Column(String(20), nullable=False)
 
-class People(Base):
-    __tablename__ = 'people'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(50))
-    height = Column(Integer)
-    mass = Column(Integer)
-    hair_color = Column(String(50))
-    skin_color = Column(String(50))
-    eye_color = Column(String(50))
-    birth_year = Column(Integer)
-    gender = Column(String(50))
-    created = Column(Integer)
-    edited = Column(String(50))
-    homeworld = Column(String(50))
-    
+   
 class Planets(Base):
     __tablename__ = 'planets'
     id = Column(Integer, primary_key=True)
@@ -44,6 +30,22 @@ class Planets(Base):
     surface_water = Column(Integer)
     created = Column(String(50))
     edited = Column(String(50))
+
+class People(Base):
+    __tablename__ = 'people'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    height = Column(Integer)
+    mass = Column(Integer)
+    hair_color = Column(String(50))
+    skin_color = Column(String(50))
+    eye_color = Column(String(50))
+    birth_year = Column(Integer)
+    gender = Column(String(50))
+    created = Column(Integer)
+    edited = Column(String(50))
+    homeworld = Column(Integer, ForeignKey('planets.id'))
+    planets = relationship(Planets)
 
 class Vehicles(Base):
     __tablename__ = 'vehicles'
@@ -60,7 +62,8 @@ class Vehicles(Base):
     cargo_capacity = Column(Integer)
     consumables = Column(String(50))
     films = Column(String(50))
-    pilots = Column(String(50))
+    pilots = Column(Integer, ForeignKey('people.id'))
+    people = relationship(People)
     created = Column(String(50))
     edited = Column(String(50))
 
